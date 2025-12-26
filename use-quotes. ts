@@ -1,0 +1,17 @@
+import { useState, useCallback } from 'react';
+
+export type Mood = 'calm' | 'sad' | 'hopeful';
+
+const MOOD_QUOTES: Record<Mood, string[]> = {
+  calm: ["the world is quiet now. let your thoughts settle like dust in the moonlight.", ...],
+  sad: ["it's okay to let the shadows linger for a while. they understand.", ...],
+  hopeful: ["tomorrow is a secret that hasn't been told yet.", ...]
+};
+
+export function useQuotes() {
+  const [currentMood, setCurrentMood] = useState<Mood>('calm');
+  const [currentQuote, setCurrentQuote] = useState(MOOD_QUOTES.calm[0]);
+  
+  // Logic to shuffle quotes based on selected mood
+  // ...
+}
