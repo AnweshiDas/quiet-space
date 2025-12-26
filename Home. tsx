@@ -1,0 +1,31 @@
+import { useQuotes, Mood } from "@/hooks/use-quotes";
+import { GlassCard } from "@/components/GlassCard";
+import { InteractiveButton } from "@/components/InteractiveButton";
+import { motion, AnimatePresence } from "framer-motion";
+import { Moon, PenLine, Volume2, VolumeX, Sparkles } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+
+export default function Home() {
+  const { quote, getNewQuote, isAnimating, mood, count } = useQuotes();
+  const [thought, setThought] = useState(() => localStorage.getItem("quiet-thought") || "");
+  const [isMusicOn, setIsMusicOn] = useState(true);
+  const [lastSaved, setLastSaved] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Sync thought entries with Local Storage
+  useEffect(() => {
+    localStorage.setItem("quiet-thought", thought);
+    if (thought.length > 0) {
+      setLastSaved(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }
+  }, [thought]);
+
+  // Audio & Mood Logic
+  const MOOD_MUSIC: Record<Mood, string> = {
+    calm: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    sad: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    hopeful: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+  };
+
+  // ... (Full Component Render Logic)
+}
